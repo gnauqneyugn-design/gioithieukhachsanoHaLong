@@ -3,7 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Web Khách Sạn Hạ Long Của Em</title>
+    
+    <style>
+    /* Mặc định là chế độ sáng (nền trắng chữ đen) */
+    body {
+        background-color: white;
+        color: black;
+        transition: 0.5s; /* Hiệu ứng chuyển màu êm ái trong 0.5 giây */
+    }
+
+    /* Đây là "lớp áo" chế độ tối */
+    .che-do-toi {
+        background-color: #222; /* Màu nền xám đen */
+        color: white; /* Chữ màu trắng */
+    }
+
+    /* Khi bật chế độ tối, link đổi màu sáng hơn cho dễ đọc */
+    .che-do-toi a {
+        color: #00ffff; 
+    }
+</style>
+<button id="nut-doi-mau" onclick="doiGiaoDien()">🌙 Chuyển Chế Độ Tối</button>
 </head>
+
 
 <body>
 
@@ -15,7 +37,6 @@
         <li><a href="#lienhe">Liên hệ đặt phòng</a></li>
     </ul>
     <hr>
-
     <h2 id="ks1">1. Vinpearl Resort & Spa Hạ Long</h2>
     <img src="https://statics.vinpearl.com/%E1%BA%A2nh%201%20M%C3%B4%20t%E1%BA%A3%20(600x450px)_1680216803.jpg" alt="Vinpearl Ha Long" width="500"height="300">
     <p>Khách sạn này nằm riêng trên một hòn đảo, rất yên tĩnh và sang trọng.</p>
@@ -80,9 +101,36 @@
 
     <hr>
     
-    <p>Liên hệ ngay: Nguyễn Mạnh Quang và Trần Minh Quân </p>
+    <p>Liên hệ ngay: Nguyễn Mạnh Quang và Trần Minh Quân</p>
 <p>Hotline: <a href="tel:0862034056">0862 034 056</a></p>
+<script>
+    // 1. Lấy cái thẻ body và cái nút bấm ra để điều khiển
+    var coThe = document.body;
+    var nutBam = document.getElementById("nut-doi-mau");
+
+    // 2. Kiểm tra xem máy tính/điện thoại của người dùng có đang để chế độ tối không
+    // (prefers-color-scheme: dark) là câu lệnh hỏi hệ điều hành
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // Nếu máy đang để tối, thì bật luôn chế độ tối cho web
+        coThe.classList.add("che-do-toi");
+        nutBam.innerHTML = "☀️ Chuyển Chế Độ Sáng";
+    }
+
+    // 3. Hàm xử lý khi bấm nút
+    function doiGiaoDien() {
+        // Bật/Tắt class 'che-do-toi'
+        coThe.classList.toggle("che-do-toi");
+
+        // Kiểm tra xem vừa bật hay vừa tắt để đổi tên nút
+        if (coThe.classList.contains("che-do-toi")) {
+            nutBam.innerHTML = "☀️ Chuyển Chế Độ Sáng";
+        } else {
+            nutBam.innerHTML = "🌙 Chuyển Chế Độ Tối";
+        }
+    }
+</script>
 
 </body>
-
 </html>
+
+
